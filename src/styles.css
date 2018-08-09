@@ -1,1 +1,51 @@
-/* You can add global styles to this file, and also import other style files */
+.img-avvillas{
+	background-image: url('assets/img/avvillas.png');
+	width: 200px;
+	height: 80px;
+	background-size: 100% 100%;
+}
+
+.fontsize-delete{
+	font-size: 0px;
+}
+
+.font-small{
+	font-size: 11px;
+}
+
+.font-big{
+	font-size: 20px;
+} 
+
+.font-red{
+	color:#e61e21;
+}
+
+.font-white{
+	color:white;
+}
+
+.font-bold{
+	font-weight: bold;
+}
+
+.color-red{
+	background-color: #e61e21;
+}
+
+.color-blue{
+	background-color: #18408f;
+}
+
+.btn-red{
+	background-color: #e61e21;
+	border: 2px solid #b11c1e;
+	color:white; 
+}
+.btn-blue{
+
+}
+
+.float-right{
+	float: right;
+}

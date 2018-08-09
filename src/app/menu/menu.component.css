@@ -1,0 +1,40 @@
+nav{
+    width: 100%;
+    margin-right: 20px;
+}
+
+ul{
+    width: 60%;
+    float: right;
+}
+
+li{
+    width: 30%;
+    list-style: none;
+    text-align: center;
+    cursor: pointer;
+    margin-left: 3px;
+    display:inline-block;
+    min-width: 90px;
+    max-width: 150px;
+}
+
+a{
+    text-decoration: none;
+    color:white;
+}
+
+.icons-personalized{
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+}
+
+.form-group > * {
+    margin-left: 10px;
+    margin-top: 10px;
+}
+.form-inline > button {
+    margin-left: 10px;
+    margin-top: 10px;
+}

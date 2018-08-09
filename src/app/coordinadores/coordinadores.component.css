@@ -1,0 +1,81 @@
+.content-coordinates{
+    width:100%;
+    border-collapse: separate;
+    border-spacing: 1px;
+}
+.block-coordinate{
+    display: table-cell;
+    width: 20%;
+    max-width: 330px;
+}
+
+.office-state{
+    width: 50%;
+    text-align: left;
+    display: inline-block;
+}
+
+.office-coordinate{
+    width: 45%;
+    display: inline-block;
+    text-align: right;
+    font-weight: bold;
+}
+
+.block-coordinate span{
+    font-size: 13px;
+}
+
+.row-block{
+    display: table-row;
+}
+
+.block-office{
+    display: table-cell;
+    width: 12%;
+    background-color:red;
+    text-align: center;
+    border: 1px solid black;
+    padding: 5px 0px;
+    font-size: 11px;
+    color: white;
+    letter-spacing: 2px;
+    min-width: 40px;
+    min-height: 40px;
+    opacity: .9;
+    text-shadow:
+        -1px -1px 0 #000,  
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+}
+
+.blocks-offices{
+    display: block;
+    width: 18%;
+}
+
+.block-active{
+    background-color: #28a745;
+    border: 1px solid #2e8842;
+}
+
+.block-inactive-time{
+    background-color: #ff2323;
+    border: 1px solid #e81e1e;
+}
+
+.block-inactive{
+    background-color: #007bff;
+    border: 1px solid #0865ca;
+}
+
+.block-listen{
+    background-color: #fff600;
+    border: 1px solid #fbf201;   
+}
+
+.block-stop{
+    background-color:  #aa66cd; 
+    border: 1px solid #a14bca;       
+}
