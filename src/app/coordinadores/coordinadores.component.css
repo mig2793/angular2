@@ -31,23 +31,21 @@
 }
 
 .block-office{
+    cursor: pointer;
     display: table-cell;
     width: 12%;
-    background-color:red;
     text-align: center;
     border: 1px solid black;
     padding: 5px 0px;
     font-size: 11px;
-    color: white;
-    letter-spacing: 2px;
+    font-weight: bold;
+    color: black;
     min-width: 40px;
     min-height: 40px;
-    opacity: .9;
-    text-shadow:
-        -1px -1px 0 #000,  
-        1px -1px 0 #000,
-        -1px 1px 0 #000,
-        1px 1px 0 #000;
+}
+
+.block-office:hover{
+    animation: blockanimate 600ms forwards;
 }
 
 .blocks-offices{
@@ -55,27 +53,56 @@
     width: 18%;
 }
 
+.choose-state-office{
+    display: inline-block;
+    width: 100%;
+}
+
+.choose-state-office div{
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    position: absolute;
+    right: 10px;
+}
+
+.choose-state-office label{
+    margin-left: 15px;
+}
+
 .block-active{
-    background-color: #28a745;
+    background-color: rgba(40,167,69,0.7);
     border: 1px solid #2e8842;
 }
 
 .block-inactive-time{
-    background-color: #ff2323;
+    background-color: rgba(255,0,0,0.7);
     border: 1px solid #e81e1e;
 }
 
 .block-inactive{
-    background-color: #007bff;
+    background-color: rgba(0,123,255,0.7);
     border: 1px solid #0865ca;
 }
 
 .block-listen{
-    background-color: #fff600;
+    background-color: rgba(255,246,0,0.7);
     border: 1px solid #fbf201;   
 }
 
 .block-stop{
-    background-color:  #aa66cd; 
+    background-color:  rgba(170,102,205,0.7); 
     border: 1px solid #a14bca;       
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes blockanimate {
+    from {transform: scale(1);}
+    to {transform: scale(1.1);}
+}
+
+/* Standard syntax */
+@keyframes blockanimate {
+    from {transform: scale(1);}
+    to {transform: scale(1.1);}
 }

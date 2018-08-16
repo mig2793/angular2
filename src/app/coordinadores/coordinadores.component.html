@@ -5,34 +5,34 @@
       <span class="office-coordinate">Coordinador x</span>
       <div class="blocks-offices">
         <div class="row-block"> 
-          <div class="block-office block-active">101</div>
+          <div class="block-office block-active" (click)="open(content)">101</div>
+          <div class="block-office block-inactive-time" (click)="open(content)">102</div>
+          <div class="block-office block-inactive" (click)="open(content)">101</div>
+          <div class="block-office block-listen" (click)="open(content)">102</div>
+          <div class="block-office block-stop" (click)="open(content)">101</div>
           <div class="block-office block-inactive-time">102</div>
-          <div class="block-office block-inactive">101</div>
-          <div class="block-office block-listen">102</div>
-          <div class="block-office block-stop">101</div>
-          <div class="block-office">102</div>
-          <div class="block-office">102</div>
-          <div class="block-office">102</div>
+          <div class="block-office block-inactive-time">102</div>
+          <div class="block-office block-inactive-time">102</div>
         </div>
         <div class="row-block">
-          <div class="block-office">102</div>
-          <div class="block-office">102</div>
-          <div class="block-office">102</div>
-          <div class="block-office">102</div>
-          <div class="block-office">102</div>
-          <div class="block-office">102</div>
-          <div class="block-office">102</div>
-          <div class="block-office">102</div>
+          <div class="block-office block-inactive-time">102</div>
+          <div class="block-office block-inactive-time">102</div>
+          <div class="block-office block-inactive-time">102</div>
+          <div class="block-office block-inactive-time">102</div>
+          <div class="block-office block-inactive-time">102</div>
+          <div class="block-office block-inactive-time">102</div>
+          <div class="block-office block-inactive-time">102</div>
+          <div class="block-office block-inactive-time">102</div>
         </div>
         <div class="row-block">
-          <div class="block-office">102</div>
-          <div class="block-office">102</div>
-          <div class="block-office">102</div>
-          <div class="block-office">102</div>
-          <div class="block-office">102</div>
-          <div class="block-office">102</div>
-          <div class="block-office">102</div>
-          <div class="block-office">102</div>
+          <div class="block-office block-inactive-time">102</div>
+          <div class="block-office block-inactive-time">102</div>
+          <div class="block-office block-inactive-time">102</div>
+          <div class="block-office block-inactive-time">102</div>
+          <div class="block-office block-inactive-time">102</div>
+          <div class="block-office block-inactive-time">102</div>
+          <div class="block-office block-inactive-time">102</div>
+          <div class="block-office block-inactive-time">102</div>
         </div>
         <div class="row-block">
           <div class="block-office">102</div>
@@ -58,3 +58,54 @@
     </div>
   </div>
 </div>
+
+<!--Pop-ups-->
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Oficina 0001</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <span>Situación actual: </span><br>
+        <span>Estado actual: </span><br><br>
+        <h6>Cambiar estado de la oficina</h6>
+        <br>
+        <div class="input-group">
+          <div class="choose-state-office">
+            <input type="radio" name="coord-active">
+            <label>Activa</label>
+            <div class="block-active"></div>
+          </div>
+          <div class="choose-state-office">
+            <input type="radio" name="coord-active">
+            <label>Inactiva</label>
+            <div class="block-inactive"></div>
+          </div>
+          <div class="choose-state-office">
+            <input type="radio" name="coord-active">
+            <label>Listen</label>
+            <div class="block-listen"></div>
+          </div>
+          <div class="choose-state-office">
+            <input type="radio" name="coord-active">
+            <label>Conectada-Detenida</label>
+            <div class="block-stop"></div>
+          </div>
+          <div class="choose-state-office">
+            <input type="radio" name="coord-active">
+            <label>Inactiva en horario de atención</label>
+            <div class="block-inactive-time"></div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Guardar</button>
+  </div>
+</ng-template>

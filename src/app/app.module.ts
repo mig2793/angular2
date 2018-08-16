@@ -9,7 +9,8 @@ import { AppRoutingModule } from './/app-routing.module';
 import { StatesComponent } from './states/states.component';
 import { PropertiesComponent } from './properties/properties.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {HttpModule} from '@angular/http';
+import { HttpModule } from '@angular/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import {HttpModule} from '@angular/http';
     BrowserModule, 
     BrowserAnimationsModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

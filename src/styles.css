@@ -1,3 +1,7 @@
+body{
+	overflow-x: hidden;
+}
+
 .img-avvillas{
 	background-image: url('assets/img/avvillas.png');
 	width: 200px;

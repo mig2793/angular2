@@ -11,8 +11,7 @@ export class CoordinadoresService {
   constructor(private http:Http) { }
 
 
-  getCoordinates():Promise<>{
+  /*getCoordinates():Promise<>{
 
-  }
-
+  }*/
 }

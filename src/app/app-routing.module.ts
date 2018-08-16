@@ -18,13 +18,16 @@ const routes: Routes = [
     	children: [
       		{
       			path: '', pathMatch:'full', 
-      			redirectTo: 'coordinadores'}, 
+      			redirectTo: 'coordinadores'
+      		}, 
       		{
       			path: 'coordinadores', 
-      			component: CoordinadoresComponent},
+      			component: CoordinadoresComponent
+      		},
       		{
       			path: 'states', 
-      			component: StatesComponent},
+      			component: StatesComponent
+      		},
       		{
       			path: 'properties', 
       			component: StatesComponent
