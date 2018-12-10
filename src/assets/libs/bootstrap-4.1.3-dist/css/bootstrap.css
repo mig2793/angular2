@@ -5,7 +5,7 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 :root {
-  --blue: #007bff;
+  --blue: #4ca2ff;
   --indigo: #6610f2;
   --purple: #6f42c1;
   --pink: #e83e8c;
@@ -377,7 +377,7 @@ h2, .h2 {
 }
 
 h3, .h3 {
-  font-size: 1.75rem;
+  font-size: 0.75rem;
 }
 
 h4, .h4 {
@@ -2247,7 +2247,7 @@ textarea.form-control {
     margin-bottom: 0;
   }
   .form-inline .form-control {
-    display: inline-block;
+    /* display: inline-block; */
     width: auto;
     vertical-align: middle;
   }
@@ -5135,7 +5135,7 @@ input[type="button"].btn-block {
   position: relative;
   display: block;
   padding: 0.75rem 1.25rem;
-  margin-bottom: -1px;
+  /* margin-bottom: -1px; */
   background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.125);
 }

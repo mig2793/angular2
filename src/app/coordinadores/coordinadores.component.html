@@ -1,105 +1,600 @@
+<div (click)="filterAnimate()"><i id="icon-filter-pos" class="fa fa-filter font-white font-big icons-personalized" aria-hidden="true"></i></div>
+<div class="color-blue font-white p-2" [@animatefilter]="stateFilter">
+  <form class="form-inline">
+    <div class="form-group">
+      <label for="coordinator">Coordinador</label>
+      <select  [(ngModel)]="filterCoord" [ngModelOptions]="{standalone: true}" class="form-control form-control-sm" id="coordinator">
+        <option value="">Todos</option>
+        <option *ngFor="let coord of coordinadores.coordinadores" value="{{coord.id}}">{{coord.nombre}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="pool">Pool</label>
+      <input type="text" [(ngModel)]="filterPool" [ngModelOptions]="{standalone: true}" name="pool" class="form-control form-control-sm" id="pool" placeholder="Id pool">
+    </div>
+    <div class="form-group">
+      <label for="office">Oficina</label>
+      <input type="text" [(ngModel)]="filter" [ngModelOptions]="{standalone: true}" class="form-control form-control-sm" id="office" placeholder="Id oficina">
+    </div>
+  </form>
+</div> 
+
+<div id="messageGeneralError" class="messageErrorGeneral font-small">{{messageErrorGeneral}}</div>
+
+<!--slider estado oficina-->
+<div class="info-content font-small-medium" [@animatefilter]="slideStateOffices">
+  <div class="info-header">
+    <h4 class="font-big" id="modal-basic-title">Estado oficina {{oficinaEstado.idOficina}}</h4>
+    <div class="icon-right cursor-pointer" (click)="silderState()">
+      <i class="fa fa-angle-right font-exra-big font-red" aria-hidden="true"></i>
+    </div>
+  </div>
+  <div class="info-body">
+    <div class="scrollY">
+      <ul class="list-group list-customer">
+        <li class="list-group-item padding-custom">            
+          <div class="row">
+            <div class="col-md-8 font-bold-medium"><span>Nombre actual</span></div>
+            <div class="col-md-4"><span>{{oficinaDatos.nombreActual}}</span></div>
+          </div>
+        </li>
+        <li class="list-group-item padding-custom color-grey">
+          <div class="row">
+            <div class="col-md-8 font-bold-medium"><span>Coordinador</span></div>
+            <div class="col-md-4"><span>1</span></div>
+          </div>
+        </li>
+        <li class="list-group-item padding-custom">            
+          <div class="row">
+            <div class="col-md-8 font-bold-medium"><span>Pool y CICS de procesamiento</span></div>
+            <div class="col-md-4"><span>{{oficinaEstado.Pool_CICS}}</span></div>
+          </div>
+        </li>
+        <li class="list-group-item padding-custom">
+          <div class="row">
+            <div class="col-md-8 font-bold-medium"><span>Código</span></div>
+            <div class="col-md-4"><span>{{oficinaEstado.idOficina}}</span></div>
+          </div>
+        </li>
+        <li class="list-group-item padding-custom">
+          <div class="row">
+            <div class="col-md-8 font-bold-medium"><span>Puerto de Conexión</span></div>
+            <div class="col-md-4"><span>{{oficinaEstado.puerto}}</span></div>
+          </div>
+        </li>
+        <li class="list-group-item padding-custom color-grey">            
+          <div class="row">
+            <div class="col-md-8 font-bold-medium"><span>Estado Actual</span></div>
+            <div class="col-md-4"><span>{{oficinaEstado.estadoActual}}</span></div>
+          </div>
+        </li>
+        <li class="list-group-item padding-custom">            
+          <div class="row">
+            <div class="col-md-8 font-bold-medium"><span>Número de transacciones</span></div>
+            <div class="col-md-4"><span>{{oficinaEstado.numeroTransacciones}}</span></div>
+          </div>
+        </li>
+      </ul>
+      <hr class="hr-style">
+      <span class="tittles font-medium font-bold">Rango de direcciones IP</span>
+      <ul class="list-group list-customer">
+        <li class="list-group-item padding-custom">
+          <div class="row">
+            <div class="col-md-8 font-bold-medium"><span>Desde</span></div>
+            <div class="col-md-4"><span>{{oficinaEstado.ipdesde}}</span></div>
+          </div>
+        </li>
+        <li class="list-group-item padding-custom color-grey">
+          <div class="row">
+            <div class="col-md-8 font-bold-medium"><span>Hasta</span></div>
+            <div class="col-md-4"><span>{{oficinaEstado.iphasta}}</span></div>
+          </div>
+        </li>
+      </ul>
+      <hr class="hr-style">
+      <span class="tittles font-medium font-bold">Tiempos de respuesta coordinador (ms)</span>
+      <ul class="list-group list-customer">
+        <li class="list-group-item padding-custom">
+          <div class="row">
+            <div class="col-md-8 font-bold-medium"><span>A oficina</span></div>
+            <div class="col-md-4"><span>{{oficinaEstado.tiempoPromedioAOficina}}</span></div>
+          </div>
+        </li>
+        <li class="list-group-item padding-custom color-grey">
+          <div class="row">
+            <div class="col-md-8 font-bold-medium"><span>En el coordinador</span></div>
+            <div class="col-md-4"><span>{{oficinaEstado.tiempoPromedioCoordinador}}</span></div>
+          </div>
+        </li>
+        <li class="list-group-item padding-custom">
+          <div class="row">
+            <div class="col-md-8 font-bold-medium"><span>CTG-CICS</span></div>
+            <div class="col-md-4"><span>{{oficinaEstado.tiempoPromedioCICS_CTG}}</span></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <hr class="hr-style">
+</div>
+
+<!--**************************************************************-->
+<!--slider propiedades oficina-->
+<div class="info-content font-small-medium" [@animatefilter]="slideProperties">
+  <div class="info-header">
+    <h4 class="font-big" id="modal-basic-title">Propiedades oficina {{propiedad.idOficina}}</h4>
+    <div class="icon-right cursor-pointer" (click)="sliderProperties()">
+      <i class="fa fa-angle-right font-exra-big font-red" aria-hidden="true"></i>
+    </div>
+  </div>
+  <div class="info-body">
+    <div class="scrollY">
+      <ul class="list-group list-customer">
+        <li class="list-group-item padding-custom">
+          <div class="row">
+            <div class="col-md-4 font-bold-medium"><span>Código</span></div>
+            <div class="col-md-8"><span>{{propiedad.idOficina}}</span></div>
+          </div>
+        </li>
+        <li class="list-group-item padding-custom color-grey">
+          <div class="row">
+            <div class="col-md-4 font-bold-medium"><span>Colección</span></div>
+            <div class="col-md-8">
+              <select disabled>
+                <option>{{propiedad.coleccion}}</option>
+              </select>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item padding-custom">            
+          <div class="row">
+            <div class="col-md-4 font-bold-medium"><span>Nombre actual</span></div>
+            <div class="col-md-8">
+                <input type="text" placeholder="Nombre actual" value="{{propiedad.nombreActual}}" disabled>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item padding-custom color-grey">            
+          <div class="row">
+            <div class="col-md-4 font-bold-medium"><span>Nombre anterior</span></div>
+            <div class="col-md-8">
+                <input type="text" placeholder="Nombre anterior" value="{{propiedad.nombreAnterior}}" disabled>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item padding-custom">            
+          <div class="row">
+            <div class="col-md-4 font-bold-medium"><span>Dirección</span></div>
+            <div class="col-md-8">
+                <input type="text" placeholder="" value="{{propiedad.direccion}}" disabled>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item padding-custom color-grey">            
+          <div class="row">
+            <div class="col-md-4 font-bold-medium"><span>Ciudad</span></div>
+            <div class="col-md-8">
+                <input type="text" placeholder="Bootá" value="{{propiedad.ciudad}}" disabled>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item padding-custom">            
+          <div class="row">
+            <div class="col-md-4 font-bold-medium"><span>Teléfono</span></div>
+            <div class="col-md-8">
+                <input type="text" placeholder="3002222" value="{{propiedad.telefono}}" disabled>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item padding-custom color-grey">            
+          <div class="row">
+            <div class="col-md-4 font-bold-medium"><span>Categoría</span></div>
+            <div class="col-md-8 font-bold-medium">
+              <select disabled>
+                  <option>{{propiedad.categoria}}</option>
+              </select>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item padding-custom">            
+          <div class="row">
+            <div class="col-md-4 font-bold-medium"><span>Horario</span></div>
+            <div class="col-md-8">
+              <input type="text" placeholder="Oficina normal" value="{{propiedad.horario}}" disabled>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item padding-custom color-grey">
+          <div class="row">
+            <div class="col-md-4 font-bold-medium"><span>Coordinador</span></div>
+            <div class="col-md-8">
+              <select disabled>
+                <option>{{propiedad.coordinador}}</option>
+              </select>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item padding-custom">
+          <div class="row">
+            <div class="col-md-4 font-bold-medium"><span>Pool y CICS de procesamiento</span></div>
+            <div class="col-md-8">
+              <select disabled>
+                <option>{{propiedad.Pool_CICS}}</option>
+              </select>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <span class="tittles font-medium font-bold">Rango de direcciones IP</span>
+      <ul class="list-group list-customer">
+        <li class="list-group-item padding-custom">
+          <div class="row">
+            <div class="col-md-4 font-bold-medium"><span>Desde</span></div>
+            <div class="col-md-8">
+                <input type="text" placeholder="10.10.17.8" value="{{propiedad.ipdesde}}" disabled>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item padding-custom color-grey">
+          <div class="row">
+            <div class="col-md-4 font-bold-medium"><span>Hasta</span></div>
+            <div class="col-md-8">
+                <input type="text" placeholder="10.10.17.8" value="{{propiedad.iphasta}}" disabled>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item padding-custom">
+          <div class="row">
+            <div class="col-md-4 font-bold-medium"><span>Puerto de Conexión</span></div>
+            <div class="col-md-8">
+                <input type="text" placeholder="4444" value="{{propiedad.puerto}}" disabled>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item padding-custom color-grey">
+          <div class="row">
+            <div class="col-md-4 font-bold-medium"><span>Estado inicial</span></div>
+            <div class="col-md-8">
+                <input type="text" placeholder="Inactiva" value="{{propiedad.estadoInicial}}" disabled>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item padding-custom">
+          <input type="checkbox" for="conversion-checkbox" disabled><label id="conversion-checkbox">&nbsp;Conversión</label>
+        </li>
+        <li class="list-group-item padding-custom color-grey">
+          <div class="row">
+            <div class="col-md-4 font-bold-medium"><span>Tipo conversión</span></div>
+            <div class="col-md-8">
+              <select disabled>
+                <option>{{propiedad.tipoConversion}}</option>
+              </select>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item padding-custom">
+          <input type="checkbox" for="monitoring-checkbox" disabled><label id="monitoring-checkbox">&nbsp;Monitoreo tiempos de respuesta</label>
+        </li>
+        <li class="list-group-item padding-custom color-grey">
+          <div class="row">
+            <div class="col-md-6">
+              <input type="checkbox" for="ssl-checkbox" disabled><label id="ssl-checkbox">&nbsp;Flag SSL</label>
+            </div>
+            <div class="col-md-6">
+              <input type="checkbox" for="connection-checkbox" disabled><label id="connection-checkbox">&nbsp;Adquirir conexión</label>
+            </div>
+          </div>
+        </li>        
+      </ul>
+    </div>
+  </div>
+  <hr class="hr-style">
+  <div class="info-footer">
+    <div class="row">
+      <div class="col-md-4 font-bold-medium">
+          <button type="button" class="btn btn-red font-small-medium btn-block" disabled>Guardar</button>
+      </div>
+      <div class="col-md-4">
+          <button type="button" class="btn btn-secondary font-small-medium btn-block" disabled>Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--**************************************************************-->
+<!--Propiedades oficinas-->
+<div id="modal-office-properties" class="modals">
+  <div class="background-popup"></div>
+  <div class="pop-up pop-up-width-big">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Propiedades oficinas</h4>
+      <button type="button" class="close" aria-label="Close" (click)="ocultarPopUp('modal-office-properties')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body modal-scroll">
+      <table class="table1">
+        <tr>
+          <th>Cod. oficina</th>
+          <th>Nombre actual</th>
+          <th>Dirección</th>
+          <th>Ciudad</th>
+          <th>Teléfono</th>
+          <th>Categoría</th>
+          <th>Horario</th>
+          <th>Coordinador</th>
+          <th>Pool-CICS</th>
+          <th>Direcciones IP</th>
+          <th>Puerto</th>
+          <th>Estado inicial</th>
+        </tr>
+        <tr *ngFor="let propiedades of propiedadesOficinas">
+          <td>{{propiedades.idOficina}}</td>
+          <td>{{propiedades.nombreActual}}</td>
+          <td>{{propiedades.direccion}}</td>
+          <td>{{propiedades.ciudad}}</td>
+          <td>{{propiedades.telefono}}</td>
+          <td>{{propiedades.categoria}}</td>
+          <td>{{propiedades.horario}}</td>
+          <td>{{propiedades.coordinador}}</td>
+          <td>{{propiedades.Pool_CICS}}</td>
+          <td>{{propiedades.rangoDireccionesIp}}</td>
+          <td>{{propiedades.puerto}}</td>
+          <td>{{propiedades.estadoInicial}}</td>
+        </tr>
+      </table>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="ocultarPopUp('modal-office-properties')">Aceptar</button>
+    </div>
+  </div>
+</div>
+
+<!--**************************************************************-->
+<!--Estado oficinas-->
+<div id="modal-office-states" class="modals">
+    <div class="background-popup"></div>
+    <div class="pop-up pop-up-width-big">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Estado oficinas</h4>
+        <button type="button" class="close" aria-label="Close" (click)="ocultarPopUp('modal-office-states')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body modal-scroll">
+        <table class="table1">
+          <tr>
+            <th>Cod. oficina</th>
+            <th>Coordinador</th>
+            <th>Pool-CICS</th>
+            <th>Direcciones IP</th>
+            <th>Puerto</th>
+            <th>Horario</th>
+            <th>Estado inicial</th>
+            <th>Estado actual</th>
+            <th>Nro. transacciones</th>
+            <th>Tiempo a oficina</th>
+            <th>Tiempo en coordinador</th>
+            <th>Tiempo CICS-CTG</th>
+          </tr>
+          <tr *ngFor="let oficina of estadoOficinas">
+            <td>{{oficina.idOficina}}</td>
+            <td>{{oficina.coordinador}}</td>
+            <td>{{oficina.Pool_CICS}}</td>
+            <td>{{oficina.rangoDireccionesIp}}</td>
+            <td>{{oficina.puerto}}</td>
+            <td>{{oficina.horario}}</td>
+            <td>{{oficina.estadoInicial}}</td>
+            <td>{{oficina.estadoActual}}</td>
+            <td>{{oficina.numeroTransacciones}}</td>
+            <td>{{oficina.tiempoPromedioAOficina}}</td>
+            <td>{{oficina.tiempoPromedioCoordinador}}</td>
+            <td>{{oficina.tiempoPromedioCICS_CTG}}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="ocultarPopUp('modal-office-states')">Aceptar</button>
+      </div>
+    </div>
+  </div>
+
+<!--**************************************************************-->
+<!--Oficinas y coordinadores-->
 <div>
   <div class="content-coordinates">
-    <div class="block-coordinate">
-      <span class="office-state">Oficina situación normal</span>
-      <span class="office-coordinate">Coordinador x</span>
-      <div class="blocks-offices">
+    <div  class="block-coordinate" id="" *ngFor="let coord of oficinas.coordinadores | filterPipe:'coordinador':filterCoord">
+      <span class="office-state font-small">Oficinas situación anormal</span>
+      <span class="office-coordinate font-medium">{{coord.nombre}} {{coord.coordinador}}</span>
+      <div class="messageErrorCoord"><span>{{coord.message}}</span></div>
+      <div id="anormal_coordinador{{coord.coordinador}}" class="blocks-offices">
         <div class="row-block"> 
-          <div class="block-office block-active" (click)="open(content)">101</div>
-          <div class="block-office block-inactive-time" (click)="open(content)">102</div>
-          <div class="block-office block-inactive" (click)="open(content)">101</div>
-          <div class="block-office block-listen" (click)="open(content)">102</div>
-          <div class="block-office block-stop" (click)="open(content)">101</div>
-          <div class="block-office block-inactive-time">102</div>
-          <div class="block-office block-inactive-time">102</div>
-          <div class="block-office block-inactive-time">102</div>
+            <div *ngFor="let oficinasCoord of coord.oficinas | sort:'idOficina' | filterPipe:'idOficina':filter | filterPipe:'idPool':filterPool">
+              <div id="{{oficinasCoord.idOficina}}" class="block-office block-active" 
+                   [attr.data-type] = "['active_'+ oficinasCoord.idOficina]"
+                   [attr.data-attr] = "[oficinasCoord.nombreActual + '_' +
+                                        oficinasCoord.estadoActual+ '_' + 
+                                        oficinasCoord.inicioSituacionActual+ '_' + 
+                                        oficinasCoord.inicioEstadoActual]" 
+                   (dblclick)="panelOptions('stateOffices',$event)" 
+                   (click)="active($event)" 
+                   (mouseenter)="OverPanelBlock($event,true)" 
+                   (mouseleave)="OverPanelBlock($event,false)" 
+                   (contextmenu)="onRightClick($event)" 
+                   *ngIf="oficinasCoord.operacion == 0 && oficinasCoord.estadoActual == 3">
+                  {{oficinasCoord.idOficina}}
+              </div>
+              <div id="{{oficinasCoord.idOficina}}" class="block-office block-stop" 
+                   [attr.data-type] = "['stop_'+ oficinasCoord.idOficina]"
+                   [attr.data-attr] = "[oficinasCoord.nombreActual + '_' +
+                                        oficinasCoord.estadoActual+ '_' + 
+                                        oficinasCoord.inicioSituacionActual+ '_' + 
+                                        oficinasCoord.inicioEstadoActual]" 
+                   (dblclick)="panelOptions('stateOffices',$event)" 
+                   (click)="active($event)" 
+                   (mouseenter)="OverPanelBlock($event,true)" 
+                   (mouseleave)="OverPanelBlock($event,false)" 
+                   (contextmenu)="onRightClick($event)" 
+                   *ngIf="oficinasCoord.operacion == 0 && oficinasCoord.estadoActual == 2">
+                  {{oficinasCoord.idOficina}}
+              </div>
+              <div id="{{oficinasCoord.idOficina}}" class="block-office block-listen" 
+                   [attr.data-type] = "['listen_'+ oficinasCoord.idOficina]"
+                   [attr.data-attr] = "[oficinasCoord.nombreActual + '_' +
+                                        oficinasCoord.estadoActual+ '_' + 
+                                        oficinasCoord.inicioSituacionActual+ '_' + 
+                                        oficinasCoord.inicioEstadoActual]"    
+                   (dblclick)="panelOptions('stateOffices',$event)" 
+                   (click)="active($event)" 
+                   (mouseenter)="OverPanelBlock($event,true)" 
+                   (mouseleave)="OverPanelBlock($event,false)" 
+                   (contextmenu)="onRightClick($event)" 
+                   *ngIf="oficinasCoord.operacion == 0 && oficinasCoord.estadoActual == 1">
+                  {{oficinasCoord.idOficina}}
+              </div>
+              <div id="{{oficinasCoord.idOficina}}" class="block-office block-inactive" 
+                   [attr.data-type] = "['inactive_'+ oficinasCoord.idOficina]"
+                   [attr.data-attr] = "[oficinasCoord.nombreActual + '_' +
+                                        oficinasCoord.estadoActual+ '_' + 
+                                        oficinasCoord.inicioSituacionActual+ '_' + 
+                                        oficinasCoord.inicioEstadoActual]" 
+                   (dblclick)="panelOptions('stateOffices',$event)" 
+                   (click)="active($event)" 
+                   (mouseenter)="OverPanelBlock($event,true)" 
+                   (mouseleave)="OverPanelBlock($event,false)" 
+                   (contextmenu)="onRightClick($event)" 
+                   *ngIf="oficinasCoord.operacion == 0 && oficinasCoord.estadoActual == 0">
+                {{oficinasCoord.idOficina}}
+              </div>
+            </div>
         </div>
+      </div>
+      <span class="office-state font-small">Oficinas situación normal</span>
+      <div id="normal_coordinador{{coord.coordinador}}" class="blocks-offices">
         <div class="row-block">
-          <div class="block-office block-inactive-time">102</div>
-          <div class="block-office block-inactive-time">102</div>
-          <div class="block-office block-inactive-time">102</div>
-          <div class="block-office block-inactive-time">102</div>
-          <div class="block-office block-inactive-time">102</div>
-          <div class="block-office block-inactive-time">102</div>
-          <div class="block-office block-inactive-time">102</div>
-          <div class="block-office block-inactive-time">102</div>
-        </div>
-        <div class="row-block">
-          <div class="block-office block-inactive-time">102</div>
-          <div class="block-office block-inactive-time">102</div>
-          <div class="block-office block-inactive-time">102</div>
-          <div class="block-office block-inactive-time">102</div>
-          <div class="block-office block-inactive-time">102</div>
-          <div class="block-office block-inactive-time">102</div>
-          <div class="block-office block-inactive-time">102</div>
-          <div class="block-office block-inactive-time">102</div>
-        </div>
-        <div class="row-block">
-          <div class="block-office">102</div>
-          <div class="block-office">102</div>
-          <div class="block-office">102</div>
-          <div class="block-office">102</div>
-          <div class="block-office">102</div>
-          <div class="block-office">102</div>
-          <div class="block-office">102</div>
-          <div class="block-office">102</div>
-        </div>
-        <div class="row-block">
-          <div class="block-office">102</div>
-          <div class="block-office">102</div>
-          <div class="block-office">102</div>
-          <div class="block-office">102</div>
-          <div class="block-office">102</div>
-          <div class="block-office">102</div>
-          <div class="block-office">102</div>
-          <div class="block-office">102</div>
+          <div class="" *ngFor="let oficinasCoord of coord.oficinas | sort:'idOficina' | filterPipe:'idOficina':filter | filterPipe:'idPool':filterPool">
+            <div id="{{oficinasCoord.idOficina}}" class="block-office block-active" 
+                 [attr.data-type] = "['active_'+ oficinasCoord.idOficina]" 
+                 [attr.data-attr] = "[oficinasCoord.nombreActual + '_' +
+                                      oficinasCoord.estadoActual+ '_' + 
+                                      oficinasCoord.inicioSituacionActual+ '_' + 
+                                      oficinasCoord.inicioEstadoActual]" 
+                  (dblclick)="panelOptions('stateOffices',$event)" 
+                  (click)="active($event)" 
+                  (mouseenter)="OverPanelBlock($event,true)" 
+                  (mouseleave)="OverPanelBlock($event,false)" 
+                  (contextmenu)="onRightClick($event)" 
+                  *ngIf="oficinasCoord.operacion == 1 && oficinasCoord.estadoActual == 3">
+                {{oficinasCoord.idOficina}}
+            </div>
+            <div id="{{oficinasCoord.idOficina}}" class="block-office block-stop" 
+                 [attr.data-type] = "['stop_'+ oficinasCoord.idOficina]"   
+                 [attr.data-attr] = "[oficinasCoord.nombreActual + '_' +
+                                      oficinasCoord.estadoActual+ '_' + 
+                                      oficinasCoord.inicioSituacionActual+ '_' + 
+                                      oficinasCoord.inicioEstadoActual]"
+                 (dblclick)="panelOptions('stateOffices',$event)" 
+                 (click)="active($event)" 
+                 (mouseenter)="OverPanelBlock($event,true)" 
+                 (mouseleave)="OverPanelBlock($event,false)" 
+                 (contextmenu)="onRightClick($event)" 
+                 *ngIf="oficinasCoord.operacion == 1 && oficinasCoord.estadoActual == 2">
+                {{oficinasCoord.idOficina}}
+            </div>
+            <div id="{{oficinasCoord.idOficina}}" class="block-office block-listen" 
+                 [attr.data-type] = "['listen_'+ oficinasCoord.idOficina]"
+                 [attr.data-attr] = "[oficinasCoord.nombreActual + '_' +
+                                      oficinasCoord.estadoActual+ '_' + 
+                                      oficinasCoord.inicioSituacionActual+ '_' + 
+                                      oficinasCoord.inicioEstadoActual]"  
+                 (dblclick)="panelOptions('stateOffices',$event)" 
+                 (click)="active($event)" 
+                 (mouseenter)="OverPanelBlock($event,true)" 
+                 (mouseleave)="OverPanelBlock($event,false)" 
+                 (contextmenu)="onRightClick($event)" 
+                 *ngIf="oficinasCoord.operacion == 1 && oficinasCoord.estadoActual == 1">
+                {{oficinasCoord.idOficina}}
+            </div>
+            <div id="{{oficinasCoord.idOficina}}" class="block-office block-inactive-time" 
+                 [attr.data-type] = "['inactive_'+ oficinasCoord.idOficina]"
+                 [attr.data-attr] = "[oficinasCoord.nombreActual + '_' +
+                                      oficinasCoord.estadoActual+ '_' + 
+                                      oficinasCoord.inicioSituacionActual+ '_' + 
+                                      oficinasCoord.inicioEstadoActual]" 
+                 (dblclick)="panelOptions('stateOffices',$event)" 
+                 (click)="active($event)" 
+                 (mouseenter)="OverPanelBlock($event,true)" 
+                 (mouseleave)="OverPanelBlock($event,false)" 
+                 (contextmenu)="onRightClick($event)" 
+                 *ngIf="oficinasCoord.operacion == 1 && oficinasCoord.estadoActual == 0">
+                {{oficinasCoord.idOficina}}
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!--Pop-ups-->
+<!--menu panel-->
+<div id="modal-menu" class="menu" [ngStyle] = "menuPanel" (clickOutside)="closePanel()" (contextmenu)="false">
+  <div>
+    <div *ngFor="let menuItems of menu.states" class="item-menu choose-state-office" id="{{menuItems.id}}" (click)="panelOptions(menuItems.action,undefined)">
+      <span>{{menuItems.name}}</span>
+      <div class="{{menuItems.class}}"></div>
+    </div>
+    <hr>
+    <div *ngFor="let menuOptions of menu.options" class="item-menu" (click)="panelOptions(menuOptions.action,undefined)"><span>{{menuOptions.name}}</span></div>
+  </div>
+</div>
 
-<ng-template #content let-c="close" let-d="dismiss">
+<!--panel informativo-->
+<div class="menu panel-info" [ngStyle] = "panelInfo">
+  <div>
+    <span><strong>Estado actual:</strong> {{oficinaOver.estadoActual}}</span>
+    <span><strong>Oficina:</strong> {{oficinaOver.nombreActual}}</span>
+    <span><strong>Situación actual(T):</strong>  {{oficinaOver.inicioSituacionActual}}</span>
+    <span><strong>Estado Actual(T):</strong> {{oficinaOver.inicioEstadoActual}}</span>
+  </div>
+</div>
+
+
+<!--Pop-ups-->
+<!--Pop up mensajes-->
+<div id="modal-general" class="modals">
+  <div class="background-popup"></div>
+  <div class="pop-up" >
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">¡Alerta!</h4>
+      <button type="button" class="close" aria-label="Close" (click)="ocultarPopUp('modal-general')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <span>{{mensajeRespuesta}}</span>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="ocultarPopUp('modal-general')">Continuar</button>
+    </div>
+  </div>
+</div>
+
+<!--Pop up escoger colección-->
+<!--<div id="pop-choose-collectionsOf" class="popup-general">
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Oficina 0001</h4>
-    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
+    <h4 class="modal-title" id="modal-basic-title">Colección de oficinas</h4>
   </div>
   <div class="modal-body">
     <form>
       <div class="form-group">
-        <span>Situación actual: </span><br>
-        <span>Estado actual: </span><br><br>
         <h6>Cambiar estado de la oficina</h6>
         <br>
         <div class="input-group">
           <div class="choose-state-office">
-            <input type="radio" name="coord-active">
             <label>Activa</label>
-            <div class="block-active"></div>
-          </div>
-          <div class="choose-state-office">
-            <input type="radio" name="coord-active">
-            <label>Inactiva</label>
-            <div class="block-inactive"></div>
-          </div>
-          <div class="choose-state-office">
-            <input type="radio" name="coord-active">
-            <label>Listen</label>
-            <div class="block-listen"></div>
-          </div>
-          <div class="choose-state-office">
-            <input type="radio" name="coord-active">
-            <label>Conectada-Detenida</label>
-            <div class="block-stop"></div>
-          </div>
-          <div class="choose-state-office">
-            <input type="radio" name="coord-active">
-            <label>Inactiva en horario de atención</label>
-            <div class="block-inactive-time"></div>
+            <select>
+              <option selected disabled>Seleccione la colección de oficinas</option>
+            </select>
           </div>
         </div>
       </div>
@@ -108,4 +603,4 @@
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Guardar</button>
   </div>
-</ng-template>
+</div>-->

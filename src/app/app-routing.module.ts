@@ -4,8 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {LoginComponent} from "./login/login.component";
 import {MenuComponent} from "./menu/menu.component";
 import {CoordinadoresComponent} from "./coordinadores/coordinadores.component";
-import {StatesComponent} from "./states/states.component";
-import {PropertiesComponent} from "./properties/properties.component";
+import {StatsComponent} from "./stats/stats.component";
 
 const routes: Routes = [
 	{
@@ -25,14 +24,6 @@ const routes: Routes = [
       			component: CoordinadoresComponent
       		},
       		{
-      			path: 'states', 
-      			component: StatesComponent
-      		},
-      		{
-      			path: 'properties', 
-      			component: StatesComponent
-      		},
-			{
 				path: '**', 
 				pathMatch:'full', 
 				redirectTo:'coordinadores'

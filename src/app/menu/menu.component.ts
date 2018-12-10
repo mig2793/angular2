@@ -1,39 +1,27 @@
-import { Component, OnInit,Input} from '@angular/core';
+import { Component, OnInit,Input,Output} from '@angular/core';
 import { trigger,state,style,animate,transition} from '@angular/animations';
+import { UtilsService } from '../utils.service';
 import { Router } from '@angular/router';
 
 @Component({
   	selector: 'app-menu',
   	templateUrl: './menu.component.html',
   	styleUrls: ['./menu.component.css'],
-  	animations: [
-    	trigger('animatefilter', [
-      	state('inactive', style({
-        	transform: 'translatex(100%)',
-        	display : 'none'
-     	 })),
-      	state('active',   style({
-      		transform: 'translatex(0)',
-        	display : 'block'
-      	})),
-      	transition('inactive => active', animate('1000ms ease-in')),
-     	transition('active => inactive', animate('1000ms ease-out'))
-    ])
-  ]
 })
 export class MenuComponent implements OnInit {
 	@Input() state: string = "inactive";
- 	constructor(private router:Router) { }
+	usuario:string;
+	ambiente:String;
+ 	constructor(private router:Router,private util:UtilsService) { }
 
 	ngOnInit() {
-
-	}
-
-	filterAnimate() {
-		this.state = this.state === 'active' ? 'inactive' : 'active';
+		this.usuario = sessionStorage.getItem("usuario");
+		let getInfoLocalStorage = this.util.getLocalStorage("coordinadores");
+		this.ambiente = getInfoLocalStorage.ambiente;
 	}
 
 	closeSession() {
+		sessionStorage.removeItem("usuario");
 		this.router.navigateByUrl('/login');
 	}
 

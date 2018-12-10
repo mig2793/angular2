@@ -2,44 +2,50 @@
   <div class="row">
     <div class="col-xs-2 col-md-2 fontsize-delete">
       <div class="img-avvillas"></div>
-      <span class="font-small font-red font-bold float-right"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;Bienvenido Miguel</span>
+      <span class="font-small font-red font-bold float-right"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;Bienvenido {{usuario}}</span>
     </div>
     <div class="col-xs-12 col-md-10 color-red font-white">
-      <div class="icons-personalized">
+      <div class="icons-personalized font-medium">
         <span (click)="closeSession()"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;Cerrar sesión</span>
       </div>
       <br>
-      <h3>Coordinador TCP-IP</h3>
+      <h5>Coordinador TCP-IP</h5>
       <nav>
-        <ul>
+        <!--<ul>
           <a [routerLink]="['coordinadores']"><li>Operación oficinas</li></a>
-          <a [routerLink]="['states']"><li>Estado</li></a>
-          <a [routerLink]="['properties']"><li>Propiedades</li></a>
-        </ul>
+          <a><li>Estadisticas</li></a>
+        </ul>-->
       </nav>
-      <div (click)="filterAnimate()"><i class="fa fa-filter font-white font-big icons-personalized" aria-hidden="true"></i></div>
     </div>
   </div>
-  <div class="color-blue font-white p-2" [@animatefilter]="state">
-    <form class="form-inline">
-      <div class="form-group">
-        <label for="coordinator">Coordinador</label>
-        <select  class="form-control form-control-sm" id="coordinator">
-          <option>Coordinador 1</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="pool">Pool</label>
-        <input type="text" class="form-control form-control-sm" id="pool" placeholder="Id pool">
-      </div>
-      <div class="form-group">
-        <label for="office">Oficina</label>
-        <input type="text" class="form-control form-control-sm" id="office" placeholder="Id office">
-      </div>
-      <button type="button" class="btn btn-secondary btn-sm">Buscar</button>
-    </form>
-  </div> 
 </div>
 
+<footer>
+  <span class="float-left font-small">{{ambiente}}</span>
+  <section>
+    <div class="container text-center font-small-medium">
+      <div class="d-inline-block margin-block">
+          <div class="block-office block-active d-inline-block"></div>
+          <span class="d-inline-block align-top">Activa</span>
+      </div>
+      <div class="d-inline-block margin-block">
+          <div class="block-office block-inactive-time d-inline-block"></div>
+          <span class="d-inline-block align-top">Inactiva</span>
+      </div>
+      <div class="d-inline-block margin-block">
+          <div class="block-office block-listen d-inline-block"></div>
+          <span class="d-inline-block align-top">Listen</span>
+      </div>
+      <div class="d-inline-block margin-block">
+          <div class="block-office block-stop d-inline-block"></div>
+          <span class="d-inline-block align-top">Conectada-Detenida</span>
+      </div>
+      <div class="d-inline-block margin-block">
+          <div class="block-office block-inactive d-inline-block"></div>
+          <span class="d-inline-block align-top">Inactiva en horario de atención</span>
+      </div>
+    </div>
+  </section>
+</footer>
 
 <router-outlet></router-outlet>

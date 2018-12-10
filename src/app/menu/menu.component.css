@@ -17,6 +17,7 @@ li{
     display:inline-block;
     min-width: 90px;
     max-width: 150px;
+    font-size: 15px;
 }
 
 a{
@@ -24,17 +25,13 @@ a{
     color:white;
 }
 
-.icons-personalized{
-    position: absolute;
-    right: 10px;
-    cursor: pointer;
+.block-office{
+    border: 1px solid black;
+    width: 15px;
+    height: 15px;
+    margin: 0px 5px;
 }
 
-.form-group > * {
-    margin-left: 10px;
-    margin-top: 10px;
-}
-.form-inline > button {
-    margin-left: 10px;
-    margin-top: 10px;
+.margin-block{
+    margin: 0 10px;
 }

@@ -3,14 +3,43 @@
     <form>
       <div class="img-avvillas"></div>
       <div class="form-group">
-        <input type="text" class="form-control" id="user" placeholder="Usuario">
+        <select id="coordinador" class="form-control" [(ngModel)]="data.coordinador" [ngModelOptions]="{standalone: true}">
+          <option value="-1" disabled selected>Coordinador</option>
+          <option value="{{coord.key}}" *ngFor="let coord of coordinadores.coordinadores">{{coord.nombre}}</option>
+        </select>
       </div>
       <div class="form-group">
-        <input type="password" class="form-control" id="password" placeholder="Contraseña">
+        <input type="text" class="form-control" id="user" [(ngModel)]="data.usuario" [ngModelOptions]="{standalone: true}" placeholder="Usuario">
       </div>
-      <button type="button" class="btn-red btn btn-block" (click)="login();">Ingresar</button>
+      <div class="form-group">
+        <input type="password" class="form-control" id="password" [(ngModel)]="data.contrasena" [ngModelOptions]="{standalone: true}" placeholder="Contraseña">
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn-red btn btn-block" (click)="login(data);">Ingresar</button>
+      </div>
     </form>
   </div>
 </div>
+
+
+<!--Pop-ups-->
+<!--Pop up mensajes-->
+<div id="modal-general" class="modals">
+    <div class="background-popup"></div>
+    <div class="pop-up" >
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">¡Alerta!</h4>
+        <button type="button" class="close" aria-label="Close" (click)="ocultarPopUp('modal-general')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <span>{{mensajeRespuesta}}</span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="ocultarPopUp('modal-general')">Continuar</button>
+      </div>
+    </div>
+  </div>
 
 <router-outlet></router-outlet>
